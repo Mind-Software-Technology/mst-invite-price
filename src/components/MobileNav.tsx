@@ -52,7 +52,7 @@ export function MobileNav() {
               <a href="#layanan" onClick={handleLinkClick}>Layanan</a>
               <a href="#fitur" onClick={handleLinkClick}>Fitur</a>
 
-              <a href="#paket-harga" onClick={handleLinkClick}>Paket & Harga</a>
+              <a href="#pricelist" onClick={handleLinkClick}>Paket & Harga</a>
               <a href="#cara-pesan" onClick={handleLinkClick}>Cara Pesan</a>
               <a href="#kontak" onClick={handleLinkClick}>Kontak</a>
             </div>
