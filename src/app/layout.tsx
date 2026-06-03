@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
+import "./tailwind.css";
 import "./globals.css";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const inter = Inter({
   variable: "--font-plus-jakarta",
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
@@ -47,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${playfair.variable} ${plusJakarta.variable} scroll-smooth`}
+      className={`${playfair.variable} ${inter.variable} scroll-smooth`}
     >
       <body>{children}</body>
     </html>

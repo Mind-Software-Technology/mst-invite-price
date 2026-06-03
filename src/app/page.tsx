@@ -6,7 +6,7 @@ import { ScrollReveal } from './scroll-reveal';
 import { MobileNav } from '@/components/MobileNav';
 import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
 import { LoadingButton } from '@/components/LoadingButton';
-import { PortfolioModal } from '@/components/PortfolioModal';
+import { OrderModal } from '@/components/OrderModal';
 import { FAQAccordion } from '@/components/FAQAccordion';
 
 // Nomor WhatsApp
@@ -49,20 +49,13 @@ const faqData = [
 ];
 
 export default function Home() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPortfolio, setSelectedPortfolio] = useState<{
-    img: string;
-    title: string;
-    category: string;
-  } | null>(null);
+  const [orderModalOpen, setOrderModalOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
 
-  const handlePortfolioClick = (item: { img: string; theme: string; label: string }) => {
-    setSelectedPortfolio({
-      img: item.img,
-      title: item.theme,
-      category: item.label
-    });
-    setModalOpen(true);
+
+  const handleOrderClick = (pkgName: string) => {
+    setSelectedPackage(pkgName);
+    setOrderModalOpen(true);
   };
 
   return (
@@ -73,12 +66,13 @@ export default function Home() {
       {/* ── NAVBAR ─────────────────────────────────── */}
       <nav className="navbar anim-nav">
         <div className="navbar-brand">
-          Mind Software<br />Technology
+          Mind Software Technology
+          <span>Jasa Undangan Digital</span>
         </div>
         <div className="navbar-links">
           <a href="#layanan">Layanan</a>
           <a href="#fitur">Fitur</a>
-          <a href="#portofolio">Portofolio</a>
+
           <a href="#pricelist">Paket & Harga</a>
           <a href="#cara-pesan">Cara Pesan</a>
           <a href="#kontak">Kontak</a>
@@ -104,10 +98,8 @@ export default function Home() {
           </div>
 
           <span className="label">Jasa Undangan Digital Premium</span>
-          <h1>Mind Software Technology</h1>
-          <span className="label" style={{ marginTop: '0.5rem', letterSpacing: '0.3em' }}>
-            — Eksklusif &amp; Modern —
-          </span>
+          <h1>Mind Software <em>Technology</em></h1>
+          <p className="hero-subtitle">Eksklusif · Elegan · Modern</p>
 
           <p>
             Kami melayani pembuatan undangan digital untuk <strong>semua jenis acara</strong> —
@@ -128,10 +120,12 @@ export default function Home() {
               <div className="trust-number">150+</div>
               <span className="trust-label">Klien Puas</span>
             </div>
+            <div className="trust-divider" />
             <div className="trust-item">
-              <div className="trust-number">1-2</div>
+              <div className="trust-number">1–2</div>
               <span className="trust-label">Hari Kerja</span>
             </div>
+            <div className="trust-divider" />
             <div className="trust-item">
               <div className="trust-number">24/7</div>
               <span className="trust-label">Fast Response</span>
@@ -258,58 +252,70 @@ export default function Home() {
 
           <div className="feature-grid">
             <div className="feature-cell reveal reveal-delay-1">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
+              <div className="feature-cell-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
               <h4>RSVP via WhatsApp</h4>
               <p>Konfirmasi kehadiran otomatis langsung via WhatsApp</p>
             </div>
 
             <div className="feature-cell reveal reveal-delay-2">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
+              <div className="feature-cell-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
               <h4>Navigasi Maps</h4>
               <p>Integrasi Google Maps ke lokasi acara</p>
             </div>
 
             <div className="feature-cell reveal reveal-delay-3">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 18V5l12-2v13"></path>
-                <circle cx="6" cy="18" r="3"></circle>
-                <circle cx="18" cy="16" r="3"></circle>
-              </svg>
+              <div className="feature-cell-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18V5l12-2v13"></path>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+              </div>
               <h4>Background Musik</h4>
               <p>Alunan musik pilihan memperindah pengalaman tamu</p>
             </div>
 
             <div className="feature-cell reveal reveal-delay-1">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
+              <div className="feature-cell-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
               <h4>Kolom Ucapan &amp; Doa</h4>
               <p>Tamu dapat mengirim pesan &amp; doa secara online</p>
             </div>
 
             <div className="feature-cell reveal reveal-delay-2">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
+              <div className="feature-cell-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
               <h4>Countdown Timer</h4>
               <p>Hitung mundur menuju hari-H yang istimewa</p>
             </div>
 
             <div className="feature-cell reveal reveal-delay-3">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
+              <div className="feature-cell-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              </div>
               <h4>Galeri Foto</h4>
               <p>Tampilkan kenangan indah hingga 8 foto pilihan</p>
             </div>
@@ -318,74 +324,14 @@ export default function Home() {
 
         <hr className="divider" />
 
-        {/* ── GALERI PORTOFOLIO ──────────────────────── */}
-        <section id="portofolio" className="section">
-          <div className="section-header reveal">
-            <span className="label">Karya Terbaik Kami</span>
-            <h2>Galeri Portofolio</h2>
-          </div>
 
-          <div className="portfolio-grid">
-            {[
-              { label: 'Pernikahan', theme: 'Rustic Garden', img: '/pexels-porto-1.jpg' },
-              { label: 'Pernikahan', theme: 'Beach Wedding', img: '/pexels-porto-2.jpg' },
-              { label: 'Pernikahan', theme: 'Traditional Adat', img: '/pexels-porto-3.jpg' },
-              { label: 'Acara Bisnis', theme: 'Grand Event', img: '/pexels-porto-4.jpg' },
-              { label: 'Wisuda', theme: 'Graduation Day', img: '/pexels-porto-5.jpg' },
-              { label: 'Ulang Tahun', theme: 'Sweet Party', img: '/pexels-porto-6.jpg' },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className={`portfolio-card reveal reveal-delay-${(i % 3) + 1}`}
-                onClick={() => handlePortfolioClick(item)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handlePortfolioClick(item);
-                  }
-                }}
-              >
-                <Image
-                  src={item.img}
-                  alt={`${item.label} - ${item.theme}`}
-                  fill
-                  style={{ objectFit: 'cover', objectPosition: 'center' }}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <div className="portfolio-overlay">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#FAF2E3' }}>
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
-                  <span>{item.theme}</span>
-                </div>
-                <div className="portfolio-tag">{item.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Portfolio Modal */}
-          {selectedPortfolio && (
-            <PortfolioModal
-              isOpen={modalOpen}
-              onClose={() => setModalOpen(false)}
-              imageSrc={selectedPortfolio.img}
-              title={selectedPortfolio.title}
-              category={selectedPortfolio.category}
-            />
-          )}
-        </section>
-
-        <hr className="divider" />
 
         {/* ── PILIHAN PAKET ──────────────────────────── */}
         <section id="pricelist" className="section">
           <div className="section-header reveal">
             <span className="label">Investasi Kebahagiaan Anda</span>
             <h2>Pilihan Paket</h2>
+            <p className="section-desc">Pilih paket yang paling sesuai dengan kebutuhan acara Anda. Tanpa biaya tersembunyi.</p>
           </div>
 
           <div className="pricing-grid">
@@ -402,14 +348,12 @@ export default function Home() {
                 <li>Countdown Timer</li>
                 <li>Masa Aktif 3 Bulan</li>
               </ul>
-              <a
-                href={buildWhatsAppURL('Halo, saya tertarik dengan Paket Basic undangan digital. Bisa minta info lebih lanjut?')}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => handleOrderClick('Basic')}
                 className="btn btn-outline btn-full"
               >
-                Pilih Basic
-              </a>
+                Pesan Basic
+              </button>
             </div>
 
             {/* Standard – Popular */}
@@ -417,7 +361,7 @@ export default function Home() {
               <div className="badge-popular">Paling Populer</div>
               <div className="pkg-name">Standard</div>
               <div className="price">Rp 99k</div>
-              <div className="price-strikethrough">Rp 250.000</div>
+              <div className="price-strikethrough">Rp 200.000</div>
               <ul className="pkg-features">
                 <li>Semua Fitur Basic</li>
                 <li>Background Music</li>
@@ -425,21 +369,19 @@ export default function Home() {
                 <li>Kisah Cinta (Love Story)</li>
                 <li>RSVP Otomatis via WhatsApp</li>
               </ul>
-              <a
-                href={buildWhatsAppURL('Halo, saya tertarik dengan Paket Standard undangan digital. Bisa minta info lebih lanjut?')}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => handleOrderClick('Standard')}
                 className="btn btn-primary btn-full"
               >
-                Pilih Standard
-              </a>
+                Pesan Standard
+              </button>
             </div>
 
             {/* Premium */}
             <div className="pricing-card reveal reveal-delay-3">
               <div className="pkg-name">Premium</div>
               <div className="price">Rp 149k</div>
-              <div className="price-strikethrough">Rp 350.000</div>
+              <div className="price-strikethrough">Rp 300.000</div>
               <ul className="pkg-features">
                 <li>Semua Fitur Standard</li>
                 <li>Amplop Digital (QRIS)</li>
@@ -447,19 +389,128 @@ export default function Home() {
                 <li>Buku Tamu &amp; Ucapan</li>
                 <li>Masa Aktif Selamanya</li>
               </ul>
-              <a
-                href={buildWhatsAppURL('Halo, saya tertarik dengan Paket Premium undangan digital. Bisa minta info lebih lanjut?')}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => handleOrderClick('Premium')}
                 className="btn btn-outline btn-full"
               >
-                Pilih Premium
-              </a>
+                Pesan Premium
+              </button>
+            </div>
+          </div>
+
+          {/* Comparison Table */}
+          <div className="comparison-section reveal reveal-delay-2">
+            <h3>Perbandingan Fitur Lengkap</h3>
+            <div className="comparison-table-wrapper">
+              <table className="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Komponen Fitur</th>
+                    <th>Basic</th>
+                    <th>Standard</th>
+                    <th>Premium</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Masa Aktif Halaman</td>
+                    <td>3 Bulan</td>
+                    <td>3 Bulan</td>
+                    <td>3 Bulan</td>
+                  </tr>
+                  <tr>
+                    <td>Cover Custom Name & Timer</td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Info Mempelai & Navigasi Maps</td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Background Music (Custom)</td>
+                    <td>-</td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Galeri Foto Pre-Wedding</td>
+                    <td>-</td>
+                    <td>Maksimal 8</td>
+                    <td>Maksimal 8</td>
+                  </tr>
+                  <tr>
+                    <td>Love Story Timeline</td>
+                    <td>-</td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sistem Reservasi RSVP</td>
+                    <td>-</td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Amplop Digital (Rekening/QRIS)</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Penyematan Galeri Video</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Buku Tamu & Kolom Ucapan</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
 
         <hr className="divider" />
+
+
 
         {/* ── CARA PEMESANAN ─────────────────────────── */}
         <section id="cara-pesan" className="section">
@@ -500,25 +551,7 @@ export default function Home() {
           </div>
         </section>
 
-        <hr className="divider" />
 
-        {/* ── TESTIMONI ──────────────────────────────── */}
-        <section className="section" style={{ textAlign: 'center' }}>
-          <div className="section-header reveal">
-            <span className="label">Mereka Sudah Merasakan</span>
-            <h2>Kata Klien Kami</h2>
-          </div>
-
-          <div className="testimonial reveal reveal-delay-1">
-            <blockquote>
-              &ldquo;Sangat puas dengan hasilnya! Desainnya elegan dan sesuai dengan tema pernikahan kami.
-              Admin juga responsif dan sabar menanggapi setiap revisi.&rdquo;
-            </blockquote>
-            <cite>— Alya &amp; Reza, Bandung</cite>
-          </div>
-        </section>
-
-        <hr className="divider" />
 
         {/* ── FAQ ────────────────────────────────────── */}
         <section className="section" style={{ textAlign: 'center' }}>
@@ -590,6 +623,11 @@ export default function Home() {
           </p>
         </footer>
 
+        <OrderModal 
+          isOpen={orderModalOpen} 
+          onClose={() => setOrderModalOpen(false)} 
+          selectedPackage={selectedPackage} 
+        />
       </div>
     </>
   );

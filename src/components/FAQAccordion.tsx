@@ -23,7 +23,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
       {items.map((item, index) => (
         <div 
           key={index} 
-          className={`faq-accordion-item ${openIndex === index ? 'open' : ''} reveal reveal-delay-${(index % 3) + 1}`}
+          className={`faq-accordion-item ${openIndex === index ? 'open' : ''}`}
         >
           <button
             className="faq-accordion-button"
