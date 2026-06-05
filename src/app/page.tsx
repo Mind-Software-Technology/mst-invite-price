@@ -367,7 +367,7 @@ export default function Home() {
                 <li>Background Music</li>
                 <li>Galeri 8 Foto</li>
                 <li>Kisah Cinta (Love Story)</li>
-                <li>RSVP Otomatis via WhatsApp</li>
+                <li>Sistem Reservasi RSVP</li>
               </ul>
               <button
                 onClick={() => handleOrderClick('Standard')}
@@ -384,10 +384,10 @@ export default function Home() {
               <div className="price-strikethrough">Rp 300.000</div>
               <ul className="pkg-features">
                 <li>Semua Fitur Standard</li>
-                <li>Amplop Digital (QRIS)</li>
-                <li>Embed Video Pre-wedding</li>
-                <li>Buku Tamu &amp; Ucapan</li>
-                <li>Masa Aktif Selamanya</li>
+                <li>Amplop Digital (Rekening/QRIS)</li>
+                <li>Penyematan Galeri Video</li>
+                <li>Buku Tamu &amp; Kolom Ucapan</li>
+                <li>Masa Aktif 3 Bulan</li>
               </ul>
               <button
                 onClick={() => handleOrderClick('Premium')}
@@ -419,7 +419,7 @@ export default function Home() {
                     <td>3 Bulan</td>
                   </tr>
                   <tr>
-                    <td>Cover Custom Name & Timer</td>
+                    <td>Cover Custom Nama & Countdown Timer</td>
                     <td>
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary)'}}><path d="M20 6L9 17l-5-5"/></svg>
                     </td>
@@ -627,6 +627,7 @@ export default function Home() {
           isOpen={orderModalOpen} 
           onClose={() => setOrderModalOpen(false)} 
           selectedPackage={selectedPackage} 
+          waNumber={WA_NUMBER}
         />
       </div>
     </>

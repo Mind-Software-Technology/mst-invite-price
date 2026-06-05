@@ -1,25 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 interface OrderModalProps {
   isOpen: boolean;
   onClose: () => void;
   selectedPackage: string | null;
+  waNumber: string;
 }
 
-export function OrderModal({ isOpen, onClose, selectedPackage }: OrderModalProps) {
+export function OrderModal({ isOpen, onClose, selectedPackage, waNumber }: OrderModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     partnerName: '',
     eventDate: '',
     theme: '',
   });
-
-  // Reset form when opened with a new package
-  useEffect(() => {
-    if (isOpen) {
-      setFormData(prev => ({ ...prev, package: selectedPackage || '' }));
-    }
-  }, [isOpen, selectedPackage]);
 
   if (!isOpen) return null;
 
@@ -41,7 +35,7 @@ export function OrderModal({ isOpen, onClose, selectedPackage }: OrderModalProps
     
     message += `\nMohon info langkah selanjutnya, terima kasih.`;
     
-    const waUrl = `https://api.whatsapp.com/send?phone=6283180553200&text=${encodeURIComponent(message)}`;
+    const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
     onClose();
   };

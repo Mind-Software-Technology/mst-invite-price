@@ -19,7 +19,7 @@ export function LoadingButton({
 }: LoadingButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = () => {
     setIsLoading(true);
     
     // Reset loading state after navigation
